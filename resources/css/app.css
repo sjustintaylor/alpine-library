@@ -1,19 +1,13 @@
 @import 'tailwindcss';
 @source "../views";
 
-* {
-  margin: 0;
-  padding: 0;
-}
-
-html,
-body {
-  height: 100%;
-  width: 100%;
-}
-
 /* Specify new namespaced colors. */
 @theme {
+  /* Fonts */
+  --font-serif:
+    'Libre Baskerville', 'ui-serif', 'Georgia', 'Cambria', 'Times New Roman', 'Times', 'serif';
+  --font-sans: 'Source Sans Pro', 'inter', 'inter Fallback', 'system-ui', 'sans-serif';
+  /* Colors */
   --color-flexoki-black: #100f0f;
   --color-flexoki-paper: #fffcf0;
   --color-flexoki-base-50: #f2f0e5;
