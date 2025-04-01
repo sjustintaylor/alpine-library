@@ -1,16 +1,16 @@
 @app({title:"Alpine Library - a simple reading list service"})
   @slot('content')
-    <header class="w-full px-16 py-8 max-w-7xl mx-auto">
+    <header class="w-full px-8 py-6 lg:px-16 lg:py-8 max-w-7xl mx-auto">
       <h1 class="font-bold font-serif text-5xl">
         Alpine Library
       </h1>
     </header>
     <main class="bg-flexoki-base-50 w-full">
       <div
-        class="w-full mx-auto max-w-7xl px-32 py-8 flex flex-col items-start justify-start lg:flex-row lg:justify-between"
+        class="w-full mx-auto max-w-7xl px-16 lg:px-32 py-6 lg:py-16 flex flex-col items-start justify-start lg:flex-row lg:justify-between"
       >
         <img src="https://picsum.photos/id/20/380/380" class="h-full" />
-        <div class="mt-20 lg:ml-40 lg:mt-0">
+        <div class="mt-10 lg:ml-40 lg:mt-0 lg:max-w-1/2 w-full">
           <h2 class="font-bold font-serif text-[2rem] mb-8">
             A simple reading list service
           </h2>
@@ -27,11 +27,15 @@
         </div>
       </div>
     </main>
-    <footer class="w-full max-w-7xl mx-auto flex flex-row items-start justify-end">
-      <h3 class="font-bold font-serif text-2xl">
-        About
-      </h3>
-      <div class="lg:ml-40">
+    <footer
+      class="w-full max-w-7xl mx-auto flex flex-col items-start justify-start lg:justify-end lg:flex-row px-16 lg:px-32 py-6 lg:py-16"
+    >
+      <div>
+        <h3 class="font-bold font-serif text-2xl mb-4 w-[380px] lg:text-right">
+          About
+        </h3>
+      </div>
+      <div class="lg:ml-40  flex flex-col items-center justify-start">
         <p class="mb-4">
           Now that we know who you are, I know who I am. I'm not a mistake! It all makes sense! In a comic, you know how you can tell who the arch-villain's going to be?
         </p>
