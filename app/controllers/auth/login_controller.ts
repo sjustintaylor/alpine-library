@@ -7,8 +7,8 @@ export default class LoginController {
     return view.render('pages/auth/login')
   }
   async store({ request, response, auth }: HttpContext) {
-    const { email, password } = await request.validateUsing(loginValidator)
-
+    // const { email, password } = await request.validateUsing(loginValidator)
+    const { email, password } = request.only(['email', 'password'])
     const user = await User.verifyCredentials(email, password)
 
     await auth.use('web').login(user)
