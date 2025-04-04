@@ -1,0 +1,70 @@
+@app({title:"Alpine Library - a simple reading list service"})
+  @slot('content')
+    <header class="w-full px-8 py-6 lg:px-16 lg:py-8 max-w-7xl mx-auto">
+      <a href="/">
+        <h1 class="font-bold font-serif text-5xl">
+          Alpine Library
+        </h1>
+      </a>
+    </header>
+    <main class="bg-flexoki-base-50 w-full">
+      <div
+        class="w-full mx-auto max-w-7xl px-16 lg:px-32 py-6 lg:py-16 flex flex-col items-start justify-start"
+      >
+        <h2 class="font-bold font-serif text-[2rem] mb-8">
+          Create your account
+        </h2>
+        <form
+          method="POST"
+          action="{{ route('auth.register.store') }}"
+          class="flex flex-col items-start justify-start space-y-6"
+        >
+          {{ csrfField() }}
+          <label>
+            <span class="font-bold mb-2 inline-block">Username</span>
+            <input
+              type="text"
+              name="username"
+              value="{{ old('username') || '' }}"
+              class="w-full border border-flexoki-base-100 px-3 py-2 rounded-md bg-flexoki-paper"
+            />
+            @inputError('username')
+              {{ $messages.join(', ') }}
+            @end
+          </label>
+
+          <label class="w-full">
+            <span class="font-bold mb-2 inline-block">Email</span>
+            <input
+              type="email"
+              name="email"
+              value="{{ old('email') || '' }}"
+              class="w-full border border-flexoki-base-100 px-3 py-2 rounded-md bg-flexoki-paper"
+            />
+            @inputError('email')
+              {{ $messages.join(', ') }}
+            @end
+          </label>
+
+          <label>
+            <span class="font-bold mb-2 inline-block">Password</span>
+            <input
+              type="password"
+              name="password"
+              value="{{ old('password') || '' }}"
+              class="w-full border border-flexoki-base-100 px-3 py-2 rounded-md bg-flexoki-paper"
+            />
+            @inputError('password')
+              {{ $messages.join(', ') }}
+            @end
+          </label>
+
+          <button
+            type="submit"
+            class="bg-flexoki-blue-200 px-4 py-2 rounded-md hover:bg-flexoki-blue-300 focus:bg-flexoki-blue-300 active:bg-flexoki-blue-400 self-end"
+          >Create your account</button>
+        </form>
+      </div>
+    </main>
+  @end
+@end

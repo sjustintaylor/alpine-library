@@ -6,7 +6,7 @@ settings:
 
 dependencies:
   '@adonisjs/auth':
-    specifier: ^9.3.1
+    specifier: ^9.3.2
     version: 9.3.2(@adonisjs/assembler@7.8.2)(@adonisjs/core@6.17.2)(@adonisjs/lucid@21.6.1)(@adonisjs/session@7.5.1)(@japa/plugin-adonisjs@4.0.0)
   '@adonisjs/core':
     specifier: ^6.17.2
@@ -33,7 +33,7 @@ dependencies:
     specifier: ^4.0.17
     version: 4.0.17(vite@6.2.3)
   '@vinejs/vine':
-    specifier: ^3.0.0
+    specifier: ^3.0.1
     version: 3.0.1
   edge.js:
     specifier: ^6.2.1

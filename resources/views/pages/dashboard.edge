@@ -1,0 +1,15 @@
+
+@app({title:"Alpine Library - a simple reading list service"})
+  @slot('content')
+    @if(auth.isAuthenticated)
+      <p>
+        Hello {{ auth.user.email }}
+      </p>
+      <form method="POST" action="{{ route('auth.logout') }}">
+        {{ csrfField() }}
+      <button class="bg-flexoki-red-200 px-3 py-2" type="submit">Log out</button>
+      </form>
+
+    @end
+  @end
+@end
