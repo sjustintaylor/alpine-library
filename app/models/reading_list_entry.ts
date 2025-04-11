@@ -14,10 +14,9 @@ export default class ReadingListEntry extends BaseModel {
   @column()
   declare entryType: EntryType
 }
-
 export enum EntryType {
-  WANT_TO_READ,
   READING,
+  WANT_TO_READ,
   FINISHED,
   ABANDONED,
 }

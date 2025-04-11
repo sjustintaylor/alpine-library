@@ -1,7 +1,7 @@
 import { DateTime } from 'luxon'
 import { BaseModel, column } from '@adonisjs/lucid/orm'
 
-export default class BookIdentifier extends BaseModel {
+export default class Author extends BaseModel {
   @column({ isPrimary: true })
   declare id: number
 
@@ -12,11 +12,5 @@ export default class BookIdentifier extends BaseModel {
   declare updatedAt: DateTime
 
   @column()
-  declare isbn10: string | null
-
-  @column()
-  declare isbn13: string | null
-
-  @column()
-  declare googleBooksId: string | null
+  declare fullName: string
 }

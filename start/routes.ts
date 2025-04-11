@@ -12,13 +12,20 @@ const RegisterController = () => import('#controllers/auth/register_controller')
 
 import router from '@adonisjs/core/services/router'
 import { middleware } from './kernel.js'
+const ProfilesController = () => import('#controllers/profiles_controller')
+const BooksController = () => import('#controllers/books_controller')
 
 router.on('/').render('pages/home')
 router
   .group(() => {
     router.on('/dashboard').render('pages/dashboard')
+
+    router.resource('books', BooksController).only(['index', 'store'])
+    router.resource('profiles', ProfilesController).only(['index', 'update'])
   })
   .use(middleware.auth())
+
+router.resource('profiles', ProfilesController).only(['show'])
 
 router
   .group(() => {

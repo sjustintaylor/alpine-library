@@ -1,8 +1,10 @@
 import { DateTime } from 'luxon'
-import { BaseModel, column, hasMany, hasOne } from '@adonisjs/lucid/orm'
+import { BaseModel, column, hasMany, hasOne, manyToMany } from '@adonisjs/lucid/orm'
 import BookIdentifier from './book_identifier.js'
-import type { HasMany, HasOne } from '@adonisjs/lucid/types/relations'
+import type { HasMany, HasOne, ManyToMany } from '@adonisjs/lucid/types/relations'
 import ReadingListEntry from './reading_list_entry.js'
+
+import Author from './author.js'
 
 export default class Book extends BaseModel {
   @column({ isPrimary: true })
@@ -34,4 +36,7 @@ export default class Book extends BaseModel {
 
   @hasMany(() => ReadingListEntry)
   declare readingListEntries: HasMany<typeof ReadingListEntry>
+
+  @manyToMany(() => Author)
+  declare authors: ManyToMany<typeof Author>
 }

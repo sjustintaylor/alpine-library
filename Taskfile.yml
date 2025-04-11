@@ -6,12 +6,7 @@ tasks:
   dev:
     cmds:
       - pnpm dev
-  db:generate:
-    cmds:
-      - pnpm drizzle-kit generate
+
   db:migrate:
     cmds:
-      - pnpm drizzle-kit migrate
-  db:push:
-    cmds:
-      - pnpm drizzle-kit push
+      - node ace migration:run
