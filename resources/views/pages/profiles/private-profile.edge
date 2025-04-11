@@ -1,6 +1,8 @@
 @app({title:"Alpine Library - a simple reading list service"})
   @slot('content')
-    <a href="/profiles">Profile</a>
+    <h1>
+      Private profile page
+    </h1>
     @if(auth.isAuthenticated)
       <p>
         Hello {{ auth.user.email }}
