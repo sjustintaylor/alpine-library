@@ -13,7 +13,7 @@ export default class GuestMiddleware {
   /**
    * The URL to redirect to when user is logged-in
    */
-  redirectTo = '/dashboard'
+  redirectTo = '/profiles'
 
   async handle(
     ctx: HttpContext,
@@ -22,7 +22,8 @@ export default class GuestMiddleware {
   ) {
     for (let guard of options.guards || [ctx.auth.defaultGuard]) {
       if (await ctx.auth.use(guard).check()) {
-        return ctx.response.redirect(this.redirectTo, true)
+        const user = await ctx.auth.authenticate()
+        return ctx.response.redirect(this.redirectTo.concat('/', user.username), true)
       }
     }
 

@@ -18,9 +18,7 @@ const BooksController = () => import('#controllers/books_controller')
 router.on('/').render('pages/home')
 router
   .group(() => {
-    router.on('/dashboard').render('pages/dashboard')
-
-    router.resource('books', BooksController).only(['index', 'store'])
+    router.resource('search', BooksController).only(['index', 'store'])
     router.resource('profiles', ProfilesController).only(['index', 'update'])
   })
   .use(middleware.auth())

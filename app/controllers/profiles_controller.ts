@@ -5,14 +5,14 @@ export default class ProfilesController {
    * Display the user's personal profile, where they can make changes.
    */
   async index({ view }: HttpContext) {
-    return view.render('pages/profiles/pages/profiles/private-profile')
+    return view.render('pages/profiles/private-profile')
   }
 
   /**
    * Show individual profile, if public
    */
   async show({ view, params }: HttpContext) {
-    return view.render('pages/profiles/pages/profiles/public-profile')
+    return view.render('pages/profiles/public-profile')
   }
 
   /**

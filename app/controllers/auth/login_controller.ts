@@ -13,6 +13,6 @@ export default class LoginController {
 
     await auth.use('web').login(user)
 
-    response.redirect('/dashboard')
+    return response.redirect().toPath(`/profiles/${user.username}`)
   }
 }
