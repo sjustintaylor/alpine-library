@@ -12,13 +12,14 @@ const RegisterController = () => import('#controllers/auth/register_controller')
 
 import router from '@adonisjs/core/services/router'
 import { middleware } from './kernel.js'
+import { RoutePath } from '#config/routes'
 const ProfilesController = () => import('#controllers/profiles_controller')
 const BooksController = () => import('#controllers/books_controller')
 
 router.on('/').render('pages/home')
 router
   .group(() => {
-    router.resource('search', BooksController).only(['index', 'store'])
+    router.resource('books', BooksController).only(['index', 'store'])
     router.resource('profiles', ProfilesController).only(['index', 'update'])
   })
   .use(middleware.auth())
@@ -28,17 +29,20 @@ router.resource('profiles', ProfilesController).only(['show'])
 router
   .group(() => {
     router
-      .get('/register', [RegisterController, 'show'])
+      .get(RoutePath.REGISTER, [RegisterController, 'show'])
       .as('register.show')
       .use(middleware.guest())
     router
-      .post('/register', [RegisterController, 'store'])
+      .post(RoutePath.REGISTER, [RegisterController, 'store'])
       .as('register.store')
       .use(middleware.guest())
 
-    router.get('/login', [LoginController, 'show']).as('login.show').use(middleware.guest())
-    router.post('/login', [LoginController, 'store']).as('login.store').use(middleware.guest())
+    router.get(RoutePath.LOGIN, [LoginController, 'show']).as('login.show').use(middleware.guest())
+    router
+      .post(RoutePath.LOGIN, [LoginController, 'store'])
+      .as('login.store')
+      .use(middleware.guest())
 
-    router.post('/logout', [LogoutController, 'handle']).as('logout')
+    router.post(RoutePath.LOGOUT, [LogoutController, 'handle']).as('logout')
   })
   .as('auth')

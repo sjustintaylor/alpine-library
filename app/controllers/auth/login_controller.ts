@@ -1,6 +1,7 @@
 import User from '#models/user'
 import { HttpContext } from '@adonisjs/core/http'
 import { loginValidator } from '#validators/auth'
+import { RoutePath } from '#config/routes'
 
 export default class LoginController {
   async show({ view }: HttpContext) {
@@ -13,6 +14,6 @@ export default class LoginController {
 
     await auth.use('web').login(user)
 
-    return response.redirect().toPath(`/profiles/${user.username}`)
+    return response.redirect().toPath(RoutePath.PROFILE)
   }
 }

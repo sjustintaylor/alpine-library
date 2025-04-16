@@ -1,3 +1,4 @@
+import { RoutePath } from '#config/routes'
 import User from '#models/user'
 import { registerValidator } from '#validators/auth'
 import type { HttpContext } from '@adonisjs/core/http'
@@ -13,6 +14,6 @@ export default class RegisterController {
 
     await auth.use('web').login(user)
 
-    return response.redirect().toPath(`/profiles/${data.username}`)
+    return response.redirect().toPath(RoutePath.PROFILE)
   }
 }
