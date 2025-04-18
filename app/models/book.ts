@@ -4,8 +4,6 @@ import BookIdentifier from './book_identifier.js'
 import type { HasMany, HasOne, ManyToMany } from '@adonisjs/lucid/types/relations'
 import ReadingListEntry from './reading_list_entry.js'
 
-import Author from './author.js'
-
 export default class Book extends BaseModel {
   @column({ isPrimary: true })
   declare id: number
@@ -31,12 +29,12 @@ export default class Book extends BaseModel {
   @column.dateTime()
   declare publishedDate: DateTime | null
 
+  @column()
+  declare authors: string | null
+
   @hasOne(() => BookIdentifier)
   declare identifiers: HasOne<typeof BookIdentifier>
 
   @hasMany(() => ReadingListEntry)
   declare readingListEntries: HasMany<typeof ReadingListEntry>
-
-  @manyToMany(() => Author)
-  declare authors: ManyToMany<typeof Author>
 }

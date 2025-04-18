@@ -11,8 +11,8 @@ export default class extends BaseSeeder {
       subtitle: '',
       description:
         "Part memoir, part master class by one of the bestselling authors of all time, this superb volume is a revealing and practical view of the writer's craft, comprising the basic tools of the trade every writer must have. King's advice is grounded in the vivid memories from childhood through his emergence as a writer, from his struggling early career to his widely reported, near-fatal accident in 1999 - and how the inextricable link between writing and living spurred his recovery.",
+      authors: 'Stephen King',
     })
-    await book.related('authors').create({ fullName: 'Stephen King' })
 
     await book.related('identifiers').create({
       isbn10: '0743455967',

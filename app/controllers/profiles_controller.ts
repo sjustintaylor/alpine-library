@@ -1,6 +1,8 @@
 import type { HttpContext } from '@adonisjs/core/http'
 import User from '#models/user'
 import { RoutePath } from '#config/routes'
+import ReadingListEntry, { EntryType } from '#models/reading_list_entry'
+import Book from '#models/book'
 
 export default class ProfilesController {
   /**
@@ -11,9 +13,21 @@ export default class ProfilesController {
     if (!user) {
       return response.redirect().toPath(RoutePath.HOME)
     }
+    const readingLists = await ReadingListEntry.findManyBy({ userId: user.id })
+    const books = await Book.findMany(readingLists.map((el) => el.id))
+
+    const readingList = readingLists.filter((el) => el.entryType === EntryType.READING)
+    const finishedList = readingLists.filter((el) => el.entryType === EntryType.FINISHED)
+    const abandonedList = readingLists.filter((el) => el.entryType === EntryType.ABANDONED)
+    const wantToReadList = readingLists.filter((el) => el.entryType === EntryType.WANT_TO_READ)
+
     return view.render('pages/profiles/private-profile', {
       username: user.username,
       visibility: user.hasPublicProfile,
+      reading: books.filter((el) => readingList.some((sm) => sm.bookId === el.id)),
+      finished: books.filter((el) => finishedList.some((sm) => sm.bookId === el.id)),
+      abandoned: books.filter((el) => abandonedList.some((sm) => sm.bookId === el.id)),
+      wantToRead: books.filter((el) => wantToReadList.some((sm) => sm.bookId === el.id)),
     })
   }
 

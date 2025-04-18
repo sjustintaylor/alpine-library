@@ -15,6 +15,8 @@ export default class extends BaseSchema {
       table.text('description')
       table.text('cover_url')
 
+      table.text('authors')
+
       table.integer('publisher_id').unsigned().references('publishers.id').onDelete('CASCADE')
     })
   }
