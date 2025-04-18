@@ -11,7 +11,10 @@ export default class ProfilesController {
     if (!user) {
       return response.redirect().toPath(RoutePath.HOME)
     }
-    return view.render('pages/profiles/private-profile')
+    return view.render('pages/profiles/private-profile', {
+      username: user.username,
+      visibility: user.hasPublicProfile,
+    })
   }
 
   /**
@@ -33,7 +36,18 @@ export default class ProfilesController {
   }
 
   /**
-   * Handle form submission for the edit action
+   * Handle form submission for setting visibility
    */
-  async update({ params, request }: HttpContext) {}
+  async update(ctx: HttpContext) {
+    const user = await ctx.auth.authenticate()
+    if (!user) {
+      return ctx.response.redirect().toPath(RoutePath.HOME)
+    }
+    const profile = await User.findBy({ username: user.username })
+    if (!profile) {
+      return ctx.response.redirect().toPath(RoutePath.HOME)
+    }
+    profile.hasPublicProfile = !profile.hasPublicProfile
+    await profile.save()
+  }
 }

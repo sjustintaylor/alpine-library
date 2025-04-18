@@ -1,17 +1,82 @@
 @app({title:"Alpine Library - a simple reading list service"})
   @slot('content')
-    <h1>
-      Private profile page
-    </h1>
-    @if(auth.isAuthenticated)
-      <p>
-        Hello {{ auth.user.email }}
-      </p>
-      <form method="POST" action="{{ route('auth.logout') }}">
-        {{ csrfField() }}
-      <button class="bg-flexoki-red-200 px-3 py-2" type="submit">Log out</button>
-      </form>
 
-    @end
+    <main
+      class="grid grid-cols-1 lg:grid-cols-[4fr_7fr] auto-rows-[min-content_auto] h-screen max-h-screen overflow-y-auto"
+    >
+      <form
+        class="flex flex-col items-end justify-start bg-flexoki-base-50 pt-10 pr-10 order-2 lg:order-1"
+        method="GET"
+        action="{{ route('books.index') }}"
+      >
+        @!input({type:"text", placeholder:"Search for a book", class:"mb-4 w-min"})
+        @component('components/primary_button', { buttonText:"Search" })
+
+        @end
+      </form>
+      <form
+        method="POST"
+        target="hiddenFrame"
+        action="{{ route('profiles.update', {id:username},{ qs: { _method: 'PUT' }}) }}"
+        class="flex flex-col items-start justify-start ml-10 order-1 lg:order-2"
+      >
+        {{ csrfField() }}
+        <h1 class="font-serif font-bold text-5xl  mt-10">
+          {{ username || "Anonymous hero" }}
+        </h1>
+        <div class="flex flex-row items-center justify-start mt-4">
+          <label class="mr-3" for="visibility">Public profile?</label>
+          <input
+            type="checkbox"
+            class="size-6"
+            id="visibility"
+            name="visibility"
+            onChange="this.form.submit()"
+            @if(visibility)
+            checked
+            @end
+          />
+
+        </div>
+        <iframe name="hiddenFrame" width="0" height="0" border="0" style="display: none;">
+        </iframe>
+
+      </form>
+      <div class="col-span-full inline-grid grid-cols-1 lg:grid-cols-[4fr_7fr] auto-rows-fr order-3">
+        <div class="bg-flexoki-base-50 pt-20">
+          <h2 class="font-serif font-bold text-3xl text-right mr-10">
+            Reading
+          </h2>
+        </div>
+        <div class="pt-20 ml-10">
+          world
+        </div>
+        <div class="bg-flexoki-base-50 pt-20">
+          <h2 class="font-serif font-bold text-3xl text-right mr-10">
+            Want to read
+          </h2>
+        </div>
+        <div class="h-full">
+          world
+        </div>
+        <div class="bg-flexoki-base-50 pt-20">
+          <h2 class="font-serif font-bold text-3xl text-right mr-10">
+            Finished
+          </h2>
+        </div>
+        <div class="h-full">
+          world
+        </div>
+        <div class="bg-flexoki-base-50 pt-20">
+          <h2 class="font-serif font-bold text-3xl text-right mr-10">
+            Did not finish
+          </h2>
+        </div>
+        <div class="h-full">
+          world
+        </div>
+      </div>
+    </main>
   @end
 @end
+

@@ -16,7 +16,7 @@ import { RoutePath } from '#config/routes'
 const ProfilesController = () => import('#controllers/profiles_controller')
 const BooksController = () => import('#controllers/books_controller')
 
-router.on('/').render('pages/home')
+router.on('/').render('pages/home').use(middleware.guest())
 router
   .group(() => {
     router.resource('books', BooksController).only(['index', 'store'])
