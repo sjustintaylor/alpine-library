@@ -22,7 +22,7 @@
       >
         {{ csrfField() }}
         <h1 class="font-serif font-bold text-5xl  mt-10">
-          {{ username || "Anonymous hero" }}
+          <a href="{{ route('profiles.show',{id:username}) }}">{{ username || "Anonymous hero" }}</a>
         </h1>
         <div class="flex flex-row items-center justify-start mt-4">
           <label class="mr-3" for="visibility">Public profile?</label>

@@ -10,8 +10,8 @@ export default class extends BaseSchema {
       table.timestamp('created_at')
       table.timestamp('updated_at')
 
-      table.text('isbn10')
-      table.text('isbn13')
+      table.text('isbn_10')
+      table.text('isbn_13')
       table.text('google_books_id')
 
       table.integer('book_id').unsigned().references('books.id').onDelete('CASCADE')

@@ -10,3 +10,9 @@ tasks:
   db:migrate:
     cmds:
       - node ace migration:run
+  db:reset:
+    cmds:
+      - rm -r tmp
+      - mkdir tmp
+      - task: db:migrate
+      - node ace db:seed

@@ -10,7 +10,7 @@ export default class extends BaseSchema {
       table.timestamp('created_at')
       table.timestamp('updated_at')
 
-      table.text('full_name').notNullable()
+      table.text('full_name').notNullable().unique()
     })
   }
 

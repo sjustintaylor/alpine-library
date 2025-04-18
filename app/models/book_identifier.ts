@@ -19,4 +19,7 @@ export default class BookIdentifier extends BaseModel {
 
   @column()
   declare googleBooksId: string | null
+
+  @column()
+  declare bookId: number
 }

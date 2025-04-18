@@ -10,11 +10,13 @@ export default class extends BaseSchema {
       table.timestamp('created_at')
       table.timestamp('updated_at')
 
-      table.integer('entry_type').unsigned()
+      table.integer('entry_type').unsigned().notNullable().defaultTo(0)
 
       table.integer('book_id').unsigned().references('books.id').onDelete('CASCADE')
 
       table.integer('user_id').unsigned().references('users.id').onDelete('CASCADE')
+
+      table.unique(['user_id', 'book_id'])
     })
   }
 
