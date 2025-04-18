@@ -38,6 +38,12 @@ dependencies:
   edge.js:
     specifier: ^6.2.1
     version: 6.2.1
+  isbn3:
+    specifier: ^1.2.9
+    version: 1.2.9
+  ky:
+    specifier: ^1.8.1
+    version: 1.8.1
   luxon:
     specifier: ^3.6.0
     version: 3.6.0
@@ -3583,6 +3589,12 @@ packages:
     resolution: {integrity: sha512-mE00Gnza5EEB3Ds0HfMyllZzbBrmLOX3vfWoj9A9PEnTfratQ/BcaJOuMhnkhjXvb2+FkY3VuHqtAGpTPmglFQ==}
     engines: {node: '>=18'}
 
+  /isbn3@1.2.9:
+    resolution: {integrity: sha512-1pdNVECL6vmjwHXUmSrrW90SF7cqGX6Zx6BoIO3+Rju/BFkyjjZsxZoWHVP5gRsESC2MOW3N1mPAWrQVEnCz0w==}
+    engines: {node: '>= 6.4.0'}
+    hasBin: true
+    dev: false
+
   /isexe@2.0.0:
     resolution: {integrity: sha512-RHxMLp9lnKHGHRng9QFhRCMbYAcVpn69smSGcq3f36xjgVVWThj4qqLbTLlq7Ssj8B+fIQ1EuCEGI2lKsyQeIw==}
 
@@ -3739,6 +3751,11 @@ packages:
       tildify: 2.0.0
     transitivePeerDependencies:
       - supports-color
+    dev: false
+
+  /ky@1.8.1:
+    resolution: {integrity: sha512-7Bp3TpsE+L+TARSnnDpk3xg8Idi8RwSLdj6CMbNWoOARIrGrbuLGusV0dYwbZOm4bB3jHNxSw8Wk/ByDqJEnDw==}
+    engines: {node: '>=18'}
     dev: false
 
   /levn@0.4.1:

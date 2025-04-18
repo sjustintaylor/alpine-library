@@ -47,13 +47,14 @@
             />
           </label>
 
-          @component('components/primary_button', { buttonText:"Log in" })
+          <div class="w-full flex flex-row items-center justify-end space-x-4">
+            <a
+              href="/register"
+              class="bg-flexoki-base-200 px-4 py-2 rounded-md hover:bg-flexoki-base-300 focus:bg-flexoki-base-300 active:bg-flexoki-base-400 self-end"
+            >Register</a>
 
-          @end
-          <a
-            href="/register"
-            class="bg-flexoki-blue-200 px-4 py-2 rounded-md hover:bg-flexoki-blue-300 focus:bg-flexoki-blue-300 active:bg-flexoki-blue-400 self-end"
-          >Register</a>
+            @!primaryButton({buttonText:"Log in"})
+          </div>
         </form>
       </div>
     </main>

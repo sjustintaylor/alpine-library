@@ -1,0 +1,117 @@
+@app({title:"Alpine Library - a simple reading list service"})
+  @slot('content')
+
+    <main
+      class="grid grid-cols-1 lg:grid-cols-[4fr_7fr] auto-rows-max lg:auto-rows-[min-content_auto] h-screen max-h-screen overflow-y-auto"
+    >
+      <form
+        class="flex flex-col items-start mx-5 lg:mx-0 lg:items-end justify-start lg:bg-flexoki-base-50 pt-10 pr-10 order-2 lg:order-1 mb-20 lg:mb-0"
+        method="GET"
+        action="{{ route('books.index') }}"
+      >
+        @!input({type:"text", name:"query", id:"query", placeholder:"Search for a book", class:"mb-4 w-min"})
+        @component('components/primary_button', { buttonText:"Search" })
+
+        @end
+      </form>
+      <div class="flex flex-col items-start justify-start mx-5 lg:mx-10 order-1 lg:order-2 lg:mb-20">
+
+        <div class="flex flex-row items-baseline justify-start space-x-4">
+          <h1 class="font-serif font-bold text-5xl mb-0 mt-10">
+            <a href="{{ route('profiles.show',{id:username}) }}">{{ username || "Anonymous hero" }}</a>
+          </h1>
+          @if(auth.isAuthenticated)
+            <form method="POST" action="{{ route('auth.logout') }}">
+              {{ csrfField() }}
+            <button type="submit" class="rounded-md border border-flexoki-base-800 hover:bg-flexoki-base-100 p-1">                <img
+                  src="data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHdpZHRoPSIyNCIgaGVpZ2h0PSIyNCIgdmlld0JveD0iMCAwIDI0IDI0IiBmaWxsPSJub25lIiBzdHJva2U9ImN1cnJlbnRDb2xvciIgc3Ryb2tlLXdpZHRoPSIyIiBzdHJva2UtbGluZWNhcD0icm91bmQiIHN0cm9rZS1saW5lam9pbj0icm91bmQiIGNsYXNzPSJsdWNpZGUgbHVjaWRlLWxvZy1vdXQtaWNvbiBsdWNpZGUtbG9nLW91dCI+PHBhdGggZD0iTTkgMjFINWEyIDIgMCAwIDEtMi0yVjVhMiAyIDAgMCAxIDItMmg0Ii8+PHBvbHlsaW5lIHBvaW50cz0iMTYgMTcgMjEgMTIgMTYgNyIvPjxsaW5lIHgxPSIyMSIgeDI9IjkiIHkxPSIxMiIgeTI9IjEyIi8+PC9zdmc+"
+                  class="size-4"
+                />
+              </button>
+
+            </form>
+          @end
+        </div>
+        @if(auth.isAuthenticated)
+          <form
+            method="POST"
+            target="hiddenFrame"
+            action="{{ route('profiles.update', {id:username},{ qs: { _method: 'PUT' }}) }}"
+            class="flex flex-row items-center justify-start mt-4"
+          >
+            {{ csrfField() }}
+              <label class="mr-3" for="visibility">Public profile?</label>
+            <input
+              type="checkbox"
+              class="size-6"
+              id="visibility"
+              name="visibility"
+              value="visibility"
+              onChange="this.form.requestSubmit()"
+              @if(visibility)
+                checked
+              @end
+            />
+
+            <iframe name="hiddenFrame" width="0" height="0" border="0" style="display: none;">
+            </iframe>
+          </form>
+        @end
+      </div>
+      <div class="col-span-full inline-grid grid-cols-1 lg:grid-cols-[4fr_7fr] lg:auto-rows-auto order-3 ">
+
+        @!listHeading({title:"Reading"})
+        @listSection()
+          @slot('entries')
+            @each(book in reading)
+              @!listItem({title:book.title, author:book.authors, description:book.description})
+
+            @end
+          @end
+        @end
+          
+          
+        @!listHeading({title:"Want to read"})
+        @listSection()
+          @slot('entries')
+            @each(book in wantToRead)
+              @!listItem({title:book.title, author:book.authors, description:book.description})
+              @if(auth.isAuthenticated)
+                <div class="flex flex-row items-center justify-start space-x-4 mt-4 self-end">
+                  @!primaryButton({buttonText:"Reading"})
+                  @!primaryButton({buttonText:"Finished"})
+                  @!primaryButton({buttonText:"Abandoned"})
+                  @!warningButton({buttonText:"Delete"})
+                </div>
+              @end
+            @end
+          @end
+            
+        @end
+          
+        @!listHeading({title:"Finished"})
+        @listSection()
+          @slot('entries')
+            @each(book in finished)
+              @!listItem({title:book.title, author:book.authors, description:book.description})
+            @end
+              
+          @end
+        @end
+          
+        @!listHeading({title:"Did not finish"})
+        @listSection()
+          @slot('entries')
+            @each(book in abandoned)
+              @!listItem({title:book.title, author:book.authors, description:book.description})
+            @end
+          @end
+        @end
+          
+          
+      </div>
+    </div>
+  </main>
+@end
+@end
+

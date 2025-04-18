@@ -15,9 +15,10 @@ export default class extends BaseSchema {
       table.text('description')
       table.text('cover_url')
 
-      table.text('authors')
+      table.text('isbn').unique()
+      table.text('google_books_id').unique()
 
-      table.integer('publisher_id').unsigned().references('publishers.id').onDelete('CASCADE')
+      table.text('authors')
     })
   }
 

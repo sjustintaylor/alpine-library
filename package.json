@@ -62,6 +62,8 @@
     "@tailwindcss/vite": "^4.0.17",
     "@vinejs/vine": "^3.0.1",
     "edge.js": "^6.2.1",
+    "isbn3": "^1.2.9",
+    "ky": "^1.8.1",
     "luxon": "^3.6.0",
     "reflect-metadata": "^0.2.2",
     "sqlite3": "^5.1.7",
