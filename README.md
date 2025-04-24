@@ -13,7 +13,7 @@ Alpine Library is a modern web application for managing your reading lists and b
 ## Technology Stack
 
 - **Framework**: AdonisJS 6 (TypeScript)
-- **Database**: LibSQL (SQLite)
+- **Database**: LibSQL (SQLite) - intended backend is Turso.tech.
 - **ORM**: Lucid ORM
 - **Frontend**: Edge templates with TailwindCSS
 - **Authentication**: AdonisJS Auth
@@ -27,17 +27,20 @@ Alpine Library is a modern web application for managing your reading lists and b
 ## Installation
 
 1. Clone the repository:
+
    ```bash
    git clone https://github.com/yourusername/alpine-library.git
    cd alpine-library
    ```
 
 2. Install dependencies:
+
    ```bash
    pnpm install
    ```
 
 3. Set up environment variables:
+
    ```bash
    cp .env.example .env
    ```
@@ -47,16 +50,12 @@ Alpine Library is a modern web application for managing your reading lists and b
    task db:migrate
    ```
 
-5. Seed the database (optional):
-   ```bash
-   node ace db:seed
-   ```
-
 ## Usage
 
 ### Development
 
 Run the development server:
+
 ```bash
 pnpm dev
 ```
