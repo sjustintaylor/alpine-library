@@ -2,6 +2,8 @@
 
 Alpine Library is a modern web application for managing your reading lists and book collections. It allows users to search for books, create personalized reading lists, and track their reading progress.
 
+[UI Design mocks are available here](https://www.figma.com/design/5fAhWEfiU4S6fPrKrfcrTD/Alpine-Library?node-id=0-1&p=f&t=4GeOhIBv5bTChfZz-0).
+
 ## Features
 
 - User authentication (register, login, logout)
