@@ -10,57 +10,26 @@ export default class BooksController {
    * Also returns search results if request contains query params for it
    */
   async index(ctx: HttpContext) {
-    const query: string = ctx.params.query
-    const isbn = (() => {
-      const result = ISBN.parse(query.trim())
-      if (result?.isValid) {
-        if (result.isIsbn10) {
-          return result.isbn10
-        }
-        if (result.isIsbn13) {
-          return result.isbn13
-        }
-      }
-    })()
-    let results: Book[] = []
-    if (isbn) {
-      const searchResults = await Book.findBy({ isbn })
-      if (!searchResults) {
-        const googleBooks = await ky
-          .get<GoogleBook>('https://www.googleapis.com/books/v1/volumes', {
-            searchParams: {
-              q: `isbn:${isbn}`,
-            },
-          })
-          .json()
-        results.push(
-          googleBooks.items.map((el) => {
-            const {
-              title,
-              subtitle,
-              authors,
-              publishedDate,
-              description,
-              imageLinks,
-              industryIdentifiers,
-            } = el.volumeInfo
-
-            const id = Object.fromEntries(industryIdentifiers.map((el) => [el.type, el.identifier]))
-
-            return Book.crea
-          })
-        )
-      }
-    } else {
-      searchResults = await ky
-        .get('https://www.googleapis.com/books/v1/volumes', {
-          searchParams: {
-            q: query,
-          },
-        })
-        .json()
+    const query: string = ctx.request.qs().query
+    if (!query) {
+      return ctx.view.render('pages/search')
     }
-    return ctx.view.render('pages/search')
+    const googleBooks = await ky
+      .get<GoogleBook>('https://www.googleapis.com/books/v1/volumes', {
+        searchParams: {
+          q: query,
+        },
+      })
+      .json()
+
+    return ctx.view.render('pages/search', {
+      results: googleBooks.items.map((el) => ({
+        title: el.volumeInfo.title,
+        author: el.volumeInfo.authors.join(', '),
+        description: el.volumeInfo.description,
+        googleId: el.id,
+      })),
+    })
   }
 
   /**

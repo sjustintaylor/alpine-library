@@ -1,12 +1,71 @@
 @app({title:"Alpine Library - a simple reading list service"})
   @slot('content')
-    <h1>
-      Search Page
-    </h1>
-    @!component("components/list_item",{
-    title: 'On Writing',
-    author: 'Stephen King',
-    description:"Part memoir, part master class by one of the bestselling authors of all time, this superb volume is a revealing and practical view of the writer's craft, comprising the basic tools of the trade every writer must have. King's advice is grounded in the vivid memories from childhood through his emergence as a writer, from his struggling early career to his widely reported, near-fatal accident in 1999 - and how the inextricable link between writing and living spurred his recovery."
-    })
+    <main
+      class="grid grid-cols-1 lg:grid-cols-[4fr_7fr] auto-rows-max lg:auto-rows-[min-content_auto] h-screen max-h-screen overflow-y-auto"
+    >
+      <div class="lg:bg-flexoki-base-50">
+      </div>
+      <form
+        class="flex flex-col items-end mx-5 lg:mx-0  justify-start  pt-10 pr-10 order-2 lg:order-1 lg:mb-10 lg:flex-row lg:items-baseline lg:justify-around max-w-2xl"
+        method="GET"
+        action="{{ route('books.index') }}"
+      >
+        @!input({type:"text", name:"query", id:"query", placeholder:"Search for a book", class:"mb-4 w-full lg:w-3/4"})
+        @component('components/primary_button', { buttonText:"Search" })
+
+        @end
+      </form>
+
+      <div class="col-span-full inline-grid grid-cols-1 lg:grid-cols-[4fr_7fr] lg:auto-rows-auto order-3">
+
+        @!listHeading({title:"Results"})
+        @listSection()
+          @slot('entries')
+            @each(book in results)
+              @!listItem({title:book.title, author:book.authors, description:book.description})
+              @if(auth.isAuthenticated)
+                <div class="flex flex-row items-center justify-start space-x-4 mt-4 self-end">
+                  @!primaryButton({buttonText:"Want to read"})
+                  @!primaryButton({buttonText:"Reading"})
+                  @!primaryButton({buttonText:"Finished"})
+                  @!primaryButton({buttonText:"Abandoned"})
+                </div>
+              @end
+            @end
+          @end
+        @end
+        
+        @!listHeading({title:"Add manually"})
+        @listSection()
+          @slot('entries')
+            @if(auth.isAuthenticated)
+              <form
+                method="POST"
+                target="hiddenFrame"
+                action=""
+                class="flex flex-col items-end justify-start mt-4 w-full max-w-2xl"
+              >
+                {{ csrfField() }}
+                @!input({type:"text", name:"title", id:"title", placeholder:"Book title", class:"mb-4 w-full "})
+                @!input({type:"text", name:"author", id:"author", placeholder:"Author", class:"mb-4 w-full "})
+                @!input({type:"text", name:"isbn", id:"isbn", placeholder:"ISBN", class:"mb-4 w-full "})
+                <textarea
+                  name="description"
+                  id="description"
+                  placeholder="Book description"
+                  class="mb-4 w-full border border-flexoki-base-100 px-3 py-2 rounded-md bg-flexoki-paper"
+                ></textarea>
+                @!primaryButton({buttonText:"Add new book"})
+              </form>
+
+            @end
+          @end
+            
+        @end
+          
+          
+          
+      </div>
+    </main>
   @end
 @end

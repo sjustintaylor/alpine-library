@@ -65,7 +65,14 @@
           @slot('entries')
             @each(book in reading)
               @!listItem({title:book.title, author:book.authors, description:book.description})
-
+              @if(auth.isAuthenticated)
+                <div class="flex flex-row items-center justify-start space-x-4 mt-4 self-end">
+                  @!primaryButton({buttonText:"Want to read"})
+                  @!primaryButton({buttonText:"Finished"})
+                  @!primaryButton({buttonText:"Abandoned"})
+                  @!warningButton({buttonText:"Delete"})
+                </div>
+              @end
             @end
           @end
         @end
@@ -94,6 +101,14 @@
           @slot('entries')
             @each(book in finished)
               @!listItem({title:book.title, author:book.authors, description:book.description})
+              @if(auth.isAuthenticated)
+                <div class="flex flex-row items-center justify-start space-x-4 mt-4 self-end">
+                  @!primaryButton({buttonText:"Want to read"})
+                  @!primaryButton({buttonText:"Reading"})
+                  @!primaryButton({buttonText:"Abandoned"})
+                  @!warningButton({buttonText:"Delete"})
+                </div>
+              @end
             @end
               
           @end
@@ -104,6 +119,14 @@
           @slot('entries')
             @each(book in abandoned)
               @!listItem({title:book.title, author:book.authors, description:book.description})
+              @if(auth.isAuthenticated)
+                <div class="flex flex-row items-center justify-start space-x-4 mt-4 self-end">
+                  @!primaryButton({buttonText:"Want to read"})
+                  @!primaryButton({buttonText:"Reading"})
+                  @!primaryButton({buttonText:"Finished"})
+                  @!warningButton({buttonText:"Delete"})
+                </div>
+              @end
             @end
           @end
         @end
